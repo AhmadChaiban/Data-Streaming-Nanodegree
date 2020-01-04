@@ -1,0 +1,13 @@
+Apply these best GitHub practices moving forward and attract the attention of recruiters and senior software engineers.
+
+You'll want to:
+
+Commit every week, at minimum
+Get 2-4 weeks streaks
+A personal side-project may grow into something bigger. You can't always predict what will catch the eye of a recruiter or senior software engineer, but when it does, you want to showcase your best work.
+
+Continue building your knowledge of using GitHub and improving your profile, be sure to check out the "GitHub Professional Profile Resources" found in the Classroom folder under Lesson Resources.
+
+Once you've implemented the necessary changes to make your profile more professional, remember to maintain activity by regularly making commits on GitHub.
+
+Good luck!
