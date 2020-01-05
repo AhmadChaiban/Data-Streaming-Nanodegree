@@ -13131,25 +13131,65 @@ div#notebook {
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
-# MapReduce
 
-The MapReduce programming technique was designed to analyze massive data sets across a cluster. In this Jupyter notebook, you'll get a sense for how Hadoop MapReduce works; however, this notebook will run locally rather than on a cluster.
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="MapReduce">MapReduce<a class="anchor-link" href="#MapReduce">&#182;</a></h1><p>The MapReduce programming technique was designed to analyze massive data sets across a cluster. In this Jupyter notebook, you'll get a sense for how Hadoop MapReduce works; however, this notebook will run locally rather than on a cluster.</p>
+<p>The biggest difference between Hadoop and Spark is that Spark tries to do as many calculations as possible in memory, which avoids moving data back and forth across a cluster. Hadoop writes intermediate calculations out to disk, which can be less efficient. Hadoop is an older technology than Spark and one of the cornerstone big data technologies.</p>
+<p>If you click on the Jupyter notebook logo at the top of the workspace, you'll be taken to the workspace directory. There you will see a file called "songplays.txt". This is a text file where each line represents a song that was played in the Sparkify app. The MapReduce code will count how many times each song was played. In other words, the code counts how many times the song title appears in the list.</p>
+<h1 id="MapReduce-versus-Hadoop-MapReduce">MapReduce versus Hadoop MapReduce<a class="anchor-link" href="#MapReduce-versus-Hadoop-MapReduce">&#182;</a></h1><p>Don't get confused by the terminology! MapReduce is a programming technique. Hadoop MapReduce is a specific implementation of the programming technique.</p>
+<p>Some of the syntax will look a bit funny, so be sure to read the explanation and comments for each section. You'll learn more about the syntax in later lessons.</p>
+<p>Run each of the code cells below to see the output.</p>
 
-The biggest difference between Hadoop and Spark is that Spark tries to do as many calculations as possible in memory, which avoids moving data back and forth across a cluster. Hadoop writes intermediate calculations out to disk, which can be less efficient. Hadoop is an older technology than Spark and one of the cornerstone big data technologies.
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install mrjob library. This package is for running MapReduce jobs with Python</span>
+<span class="c1"># In Jupyter notebooks, &quot;!&quot; runs terminal commands from inside notebooks </span>
 
-If you click on the Jupyter notebook logo at the top of the workspace, you'll be taken to the workspace directory. There you will see a file called "songplays.txt". This is a text file where each line represents a song that was played in the Sparkify app. The MapReduce code will count how many times each song was played. In other words, the code counts how many times the song title appears in the list.
+<span class="o">!</span> pip install mrjob
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
-# MapReduce versus Hadoop MapReduce
+<div class="output_area">
 
-Don't get confused by the terminology! MapReduce is a programming technique. Hadoop MapReduce is a specific implementation of the programming technique.
+    <div class="prompt"></div>
 
-Some of the syntax will look a bit funny, so be sure to read the explanation and comments for each section. You'll learn more about the syntax in later lessons. 
 
-Run each of the code cells below to see the output.# Install mrjob library. This package is for running MapReduce jobs with Python
-# In Jupyter notebooks, "!" runs terminal commands from inside notebooks 
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting mrjob
+  Downloading https://files.pythonhosted.org/packages/e6/25/5db4339980022a30a4b354f15a4ac74b8bfe2456f756274a5048ac40f117/mrjob-0.7.1-py2.py3-none-any.whl (434kB)
+    100% |████████████████████████████████| 440kB 21.3MB/s ta 0:00:01
+Requirement already satisfied: PyYAML&gt;=3.10 in /opt/conda/lib/python3.6/site-packages (from mrjob) (3.12)
+Installing collected packages: mrjob
+Successfully installed mrjob-0.7.1
+</pre>
+</div>
+</div>
 
-! pip install mrjob%%file wordcount.py
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">file</span> wordcount.py
 # %%file is an Ipython magic function that saves the code cell as a file
 
 from mrjob.job import MRJob # import the mrjob library
@@ -13169,41 +13209,105 @@ class MRSongCount(MRJob):
     def reducer(self, key, values):
         yield (key, sum(values))
         
-if __name__ == "__main__":
-    MRSongCount.run()# run the code as a terminal command
-! python wordcount.py songplays.txt# Summary of what happens in the code.
+if __name__ == &quot;__main__&quot;:
+    MRSongCount.run()
+</pre></div>
 
-There is a list of songs in songplays.txt that looks like the following:
+    </div>
+</div>
+</div>
 
-Deep Dreams
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Overwriting wordcount.py
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># run the code as a terminal command</span>
+<span class="o">!</span> python wordcount.py songplays.txt
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>No configs found; falling back on auto-configuration
+No configs specified for inline runner
+Creating temp directory /tmp/wordcount.root.20200105.131905.639613
+Running step 1 of 1...
+job output is in /tmp/wordcount.root.20200105.131905.639613/output
+Streaming final output from /tmp/wordcount.root.20200105.131905.639613/output...
+&#34;Deep Dreams&#34;	1131
+&#34;Broken Networks&#34;	510
+&#34;Data House Rock&#34;	828
+Removing temp directory /tmp/wordcount.root.20200105.131905.639613...
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary-of-what-happens-in-the-code.">Summary of what happens in the code.<a class="anchor-link" href="#Summary-of-what-happens-in-the-code.">&#182;</a></h1><p>There is a list of songs in songplays.txt that looks like the following:</p>
+<p>Deep Dreams
 Data House Rock
 Deep Dreams
 Data House Rock
 Broken Networks
 Data House Rock
-etc.....
+etc.....</p>
+<p>During the map step, the code reads in the txt file one line at a time. The map steps outputs a set of tuples that look like this:</p>
+<p>(Deep Dreams, 1)<br>
+(Data House Rock, 1)<br>
+(Deep Dreams, 1)<br>
+(Data House Rock, 1)<br>
+(Broken Networks, 1)<br>
+(Data House Rock, 1)<br>
+etc.....</p>
+<p>Finally, the reduce step combines all of the values by keys and sums the values:</p>
+<p>(Deep Dreams, [1, 1, 1, 1, 1, 1, ... ])<br>
+(Data House Rock, [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...])<br>
+(Broken Networks, [1, 1, 1, ...]</p>
+<p>With the output</p>
+<p>(Deep Dreams, 1131)<br>
+(Data House Rock, 510)<br>
+(Broken Networks, 828)</p>
 
-During the map step, the code reads in the txt file one line at a time. The map steps outputs a set of tuples that look like this:
-
-(Deep Dreams, 1)  
-(Data House Rock, 1)  
-(Deep Dreams, 1)  
-(Data House Rock, 1)  
-(Broken Networks, 1)  
-(Data House Rock, 1)  
-etc.....
-
-Finally, the reduce step combines all of the values by keys and sums the values:  
-
-(Deep Dreams, \[1, 1, 1, 1, 1, 1, ... \])  
-(Data House Rock, \[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...\])  
-(Broken Networks, \[1, 1, 1, ...\]  
-
-With the output 
-
-(Deep Dreams, 1131)  
-(Data House Rock, 510)  
-(Broken Networks, 828)  
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
