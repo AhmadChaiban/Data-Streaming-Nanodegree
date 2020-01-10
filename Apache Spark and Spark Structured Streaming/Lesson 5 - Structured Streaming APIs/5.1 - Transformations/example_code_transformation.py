@@ -29,7 +29,7 @@ def transformation_exercise():
     # TODO how do we solve this problem?
     lines_df = lines_df = lines_df.withColumnRenamed("name", "city_name").select("city_id", "city_name")
     left_df = cities_df.join(lines_df, cities_df.id == lines_df.city_id, "inner")
-
+    
     # TODO how do you know which track is still operating?
     tracks_df.select(psf.max('closure')).distinct().show()
 
